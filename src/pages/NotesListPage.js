@@ -16,6 +16,7 @@ const NotesListPage = () => {
       <div className="notes">
           <div className="notes-header">
                   <h2 className="notes-title">&#9782;</h2>
+                <h3>Notes</h3>
               <p className="notes-count">{notes.length}</p>
           </div>
         <div className="notes-list">
