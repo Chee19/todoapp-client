@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react";
-import {useParams, useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import {ReactComponent as ArrowLeft} from "../assets/arrow-left.svg";
 
 const NotePage = () => {
@@ -46,7 +46,11 @@ const NotePage = () => {
                 <h3>
                     <ArrowLeft onClick={() => {handleSubmit()}}/>
                 </h3>
-                <button onClick={deleteNote}>Delete</button>
+                {id === 'new' ? (
+                    <button onClick={handleSubmit}>Done</button>
+                ) : (
+                    <button onClick={deleteNote}>Delete</button>
+                )}
             </div>
             <textarea onChange={(e) => {setNote({...note, "body": e.target.value})}} defaultValue={note?.body}></textarea>
         </div>
