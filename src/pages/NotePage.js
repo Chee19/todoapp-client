@@ -17,13 +17,23 @@ const NotePage = () => {
         const data = await response.json();
         setNote(data);
     }
+
+    const createNote = async () => {
+        await fetch(`/api/notes/create/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(note)
+        });
+    };
     const updateNote = async () => {
-        fetch(`/api/notes/${id}/update`, {
+        await fetch(`/api/notes/${id}/update`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify(note)
+            body: JSON.stringify(note)
         });
     };
 
@@ -37,7 +47,13 @@ const NotePage = () => {
     }
 
     const handleSubmit = () => {
-        updateNote();
+        if (id !== "new" && note.body === "") {
+            deleteNote();
+        } else if (id !== "new") {
+            updateNote();
+        } else if (id === "new" && note.body !== null) {
+            createNote();
+        }
         navigate("/");
     }
     return(
